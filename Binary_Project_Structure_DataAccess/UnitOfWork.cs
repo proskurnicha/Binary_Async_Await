@@ -4,6 +4,7 @@ using System.Text;
 using Binary_Project_Structure_DataAccess.Repositories;
 using Binary_Project_Structure_DataAccess.Interfaces;
 using Binary_Project_Structure_DataAccess.Models;
+using System.Threading.Tasks;
 
 namespace Binary_Project_Structure_DataAccess
 {
@@ -15,6 +16,7 @@ namespace Binary_Project_Structure_DataAccess
         {
             databaseContext = new DatabaseContext();
         }
+
         private AircraftRepository aircraftRepository;
 
         private CrewRepository crewRepository;
@@ -109,6 +111,11 @@ namespace Binary_Project_Structure_DataAccess
                     typeAircraftRepository = new TypeAircraftRepository();
                 return typeAircraftRepository;
             }
+        }
+
+        public async Task<int> SaveChagesAsync()
+        {
+            return await databaseContext.SaveChangesAsync();
         }
 
         public int SaveChages()

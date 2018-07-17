@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using System.Text;
 using Binary_Project_Structure_DataAccess.Repositories;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Binary_Project_Structure_DataAccess.Repositories
 {
     public class DepartureRepositoty : Repository<Departure>
     {
-        public override Departure Update(Departure entity)
+        public async override Task<Departure> Update(Departure entity)
         {
-            Func<Departure, bool> filter = x => x.Id == entity.Id;
-            Departure departure = base.GetById(filter);
+            Expression<Func<Departure, bool>> filter = x => x.Id == entity.Id;
+            Departure departure = await base.GetById(filter);
 
             if (departure == null)
                 return null;
@@ -24,6 +26,7 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             departure.DepartureTime = entity.DepartureTime;
             departure.FlightId = entity.FlightId;
             departure.Flight = context.Set<Flight>().Where(x => x.Id == entity.FlightId).FirstOrDefault();
+
             return departure;
         }
     }

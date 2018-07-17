@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -7,14 +8,15 @@ namespace Binary_Project_Structure_DataAccess.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        List<TEntity> GetAll();
+        Task<List<TEntity>> GetAll();
 
-        TEntity GetById(Func<TEntity, bool> filter = null);
+        Task<TEntity> GetById(Expression<Func<TEntity, bool>> filter);
 
-        TEntity Create(TEntity entity);
+        Task<TEntity> Create(TEntity entity);
 
-        TEntity Update(TEntity id);
+        Task<TEntity> Update(TEntity entity);
 
-        bool Delete(Func<TEntity, bool> prEntity = null);
+        Task<bool> Delete(Expression<Func<TEntity, bool>> prEntity);
+
     }
 }

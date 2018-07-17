@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Binary_Project_Structure_DataAccess.Models;
 
 namespace Binary_Project_Structure_DataAccess.Interfaces
@@ -27,6 +28,6 @@ namespace Binary_Project_Structure_DataAccess.Interfaces
 
         int SaveChages();
 
-        //Task<int> SaveChangesAsync();
+        Task<int> SaveChagesAsync();
     }
 }

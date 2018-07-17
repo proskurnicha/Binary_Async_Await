@@ -30,40 +30,41 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             context = new DatabaseContext();
         }
 
-        public virtual List<TEntity> GetAll()
+        public async virtual Task<List<TEntity>> GetAll()
         {
-            return context.Set<TEntity>().ToList();
+            return await context.Set<TEntity>().ToListAsync();
         }
 
-        public virtual TEntity GetById(Func<TEntity, bool> filter = null)
+        public async virtual Task<TEntity> GetById(Expression<Func<TEntity, bool>> filter)
         {
-            var query = context.Set<TEntity>().Where(filter);
-            if (query.Count() == 0)
+            TEntity query = await context.Set<TEntity>().FirstOrDefaultAsync((filter));
+
+            if (query == null)
                 return null;
 
-            return query.Where(filter).First();
+            return query;
         }
 
-        public virtual TEntity Create(TEntity entity)
+        public async virtual Task<TEntity> Create(TEntity entity)
         {
-            context.Set<TEntity>().Add(entity);
+            await context.Set<TEntity>().AddAsync(entity);
             int result = context.SaveChanges();
-            return context.Set<TEntity>().LastOrDefault(); ;
+            return await context.Set<TEntity>().LastOrDefaultAsync(); ;
         }
 
-        public virtual TEntity Update(TEntity entity)
+        public async virtual Task<TEntity> Update(TEntity entity)
         {
             return null;
         }
 
-        public virtual bool Delete(Func<TEntity, bool> prEntity = null)
+        public async virtual Task<bool> Delete(Expression<Func<TEntity, bool>> prEntity)
         {
-            TEntity entity = context.Set<TEntity>().FirstOrDefault(prEntity);
+            TEntity entity = await context.Set<TEntity>().FirstOrDefaultAsync(prEntity);
 
             if (entity == null)
                 return false;
 
-            List<TEntity> entities = context.Set<TEntity>().ToList();
+            List<TEntity> entities = await context.Set<TEntity>().ToListAsync();
             entities.Remove(entity);
             context.SaveChanges();
             return true;

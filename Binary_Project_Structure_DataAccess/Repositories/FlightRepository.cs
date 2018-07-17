@@ -5,20 +5,22 @@ using Binary_Project_Structure_DataAccess.Models;
 using Binary_Project_Structure_DataAccess.Interfaces;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Binary_Project_Structure_DataAccess.Repositories
 {
     public class FlightRepository : Repository<Flight>
     {
-        public override List<Flight> GetAll()
+        public async override Task<List<Flight>> GetAll()
         {
-            return context.Set<Flight>().Include(s => s.Tickets).ToList();
+            return await context.Set<Flight>().Include(s => s.Tickets).ToListAsync();
         }
 
-        public override Flight Update(Flight entity)
+        public async override Task<Flight> Update(Flight entity)
         {
-            Func<Flight, bool> filter = x => x.Id == entity.Id;
-            Flight flight = base.GetById(filter);
+            Expression<Func<Flight, bool>> filter = x => x.Id == entity.Id;
+            Flight flight = await base.GetById(filter);
 
             if (flight == null)
                 return null;

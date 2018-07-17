@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 using Binary_Project_Structure_DataAccess.Repositories;
 using Binary_Project_Structure_DataAccess.Models;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Binary_Project_Structure_DataAccess.Repositories
 {
     public class StewardessRepository : Repository<Stewardess>
     {
-        public override Stewardess Update(Stewardess entity)
+        public async override Task<Stewardess> Update(Stewardess entity)
         {
-            Func<Stewardess, bool> filter = x => x.Id == entity.Id;
-            Stewardess stewardess = base.GetById(filter);
+            Expression<Func<Stewardess, bool>> filter = x => x.Id == entity.Id;
+            Stewardess stewardess = await base.GetById(filter);
             
             if (stewardess == null)
                 return null;
