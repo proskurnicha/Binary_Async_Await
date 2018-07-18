@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Binary_Project_Structure_BLL.Interfaces;
 using Binary_Project_Structure_DataAccess.Interfaces;
 using Binary_Project_Structure_DataAccess.Models;
@@ -15,29 +16,29 @@ namespace Binary_Project_Structure_BLL.Services
 
         }
 
-        public List<PilotDto> GetAll()
+        public async Task<List<PilotDto>> GetAll()
         {
-            return GetAll<Pilot, PilotDto>();
+            return await GetAll<Pilot, PilotDto>();
         }
 
-        public PilotDto GetById(int id)
+        public async Task<PilotDto> GetById(int id)
         {
-            return GetById<Pilot, PilotDto>(x => x.Id == id);
+            return await GetById<Pilot, PilotDto>(x => x.Id == id);
         }
 
-        public PilotDto Create(PilotDto entity)
+        public async Task<PilotDto> Create(PilotDto entity)
         {
-            return Create<PilotDto, Pilot>(entity);
+            return await Create<PilotDto, Pilot>(entity);
         }
 
-        public PilotDto Update(PilotDto entity)
+        public async Task<PilotDto> Update(PilotDto entity)
         {
-            return Update<PilotDto, Pilot>(entity);
+            return await Update<PilotDto, Pilot>(entity);
         }
 
-        bool IPilotService.Delete(int id)
+        async Task<bool> IPilotService.Delete(int id)
         {
-            return Delete<Pilot>(x => x.Id == id);
+            return await Delete<Pilot>(x => x.Id == id);
         }
     }
 }

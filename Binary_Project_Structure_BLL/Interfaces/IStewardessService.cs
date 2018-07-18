@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Binary_Project_Structure_BLL.Interfaces
 {
     public interface IStewardessService
     {
-        List<StewardessDto> GetAll();
-        StewardessDto GetById(int id);
-        StewardessDto Create(StewardessDto entity);
-        StewardessDto Update(StewardessDto entity);
-        bool Delete(int id);
+        Task<List<StewardessDto>> GetAll();
+        Task<StewardessDto> GetById(int id);
+        Task<StewardessDto> Create(StewardessDto entity);
+        Task<StewardessDto> Update(StewardessDto entity);
+        Task<bool> Delete(int id);
     }
 }

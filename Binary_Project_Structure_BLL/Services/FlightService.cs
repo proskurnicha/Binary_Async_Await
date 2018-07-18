@@ -7,6 +7,7 @@ using Binary_Project_Structure_Shared.DTOs;
 using Binary_Project_Structure_DataAccess.Models;
 using AutoMapper;
 using Ninject;
+using System.Threading.Tasks;
 
 namespace Binary_Project_Structure_BLL.Services
 {
@@ -16,29 +17,29 @@ namespace Binary_Project_Structure_BLL.Services
         {
 
         }
-        public List<FlightDto> GetAll()
+        public async  Task<List<FlightDto>> GetAll()
         {
-            return GetAll<Flight, FlightDto>();
+            return await GetAll<Flight, FlightDto>();
         }
 
-        public FlightDto GetById(int id)
+        public async Task<FlightDto> GetById(int id)
         {
-            return GetById<Flight, FlightDto>(x => x.Id == id);
+            return await GetById<Flight, FlightDto>(x => x.Id == id);
         }
 
-        public FlightDto Create(FlightDto entity)
+        public async Task<FlightDto> Create(FlightDto entity)
         {
-            return Create<FlightDto, Flight>(entity);
+            return await Create<FlightDto, Flight>(entity);
         }
 
-        public FlightDto Update(FlightDto entity)
+        public async Task<FlightDto> Update(FlightDto entity)
         {
-            return Update<FlightDto, Flight>(entity);
+            return await Update<FlightDto, Flight>(entity);
         }
-        
-        bool IFlightService.Delete(int id)
+
+        async Task<bool> IFlightService.Delete(int id)
         {
-            return Delete<Flight>(x => x.Id == id);
+            return await Delete<Flight>(x => x.Id == id);
         }
     }
 }

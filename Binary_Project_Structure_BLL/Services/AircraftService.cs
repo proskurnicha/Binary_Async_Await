@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Binary_Project_Structure_BLL.Interfaces;
 using Binary_Project_Structure_DataAccess.Interfaces;
 using Binary_Project_Structure_DataAccess.Models;
@@ -14,29 +15,29 @@ namespace Binary_Project_Structure_BLL.Services
         {
 
         }
-        public List<AircraftDto> GetAll()
+        public async Task<List<AircraftDto>> GetAll()
         {
-            return GetAll<Aircraft, AircraftDto>();
+            return await GetAll<Aircraft, AircraftDto>();
         }
 
-        public AircraftDto GetById(int id)
+        public async Task<AircraftDto> GetById(int id)
         {
-            return GetById<Aircraft, AircraftDto>(x => x.Id == id);
+            return await GetById<Aircraft, AircraftDto>(x => x.Id == id);
         }
 
-        public AircraftDto Create(AircraftDto entity)
+        public async Task<AircraftDto> Create(AircraftDto entity)
         {
-            return Create<AircraftDto, Aircraft>(entity);
+            return await Create<AircraftDto, Aircraft>(entity);
         }
 
-        public AircraftDto Update(AircraftDto entity)
+        public async Task<AircraftDto> Update(AircraftDto entity)
         {
-            return Update<AircraftDto, Aircraft>(entity);
+            return await Update<AircraftDto, Aircraft>(entity);
         }
 
-        bool IAircraftService.Delete(int id)
+        async Task<bool> IAircraftService.Delete(int id)
         {
-            return Delete<Aircraft>(x => x.Id == id);
+            return await Delete<Aircraft>(x => x.Id == id);
         }
     }
 }

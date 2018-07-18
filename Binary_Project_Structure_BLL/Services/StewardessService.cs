@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Binary_Project_Structure_BLL.Interfaces;
 using Binary_Project_Structure_DataAccess.Interfaces;
 using Binary_Project_Structure_DataAccess.Models;
@@ -15,29 +16,29 @@ namespace Binary_Project_Structure_BLL.Services
 
         }
 
-        public List<StewardessDto> GetAll()
+        public async Task<List<StewardessDto>> GetAll()
         {
-            return GetAll<Stewardess, StewardessDto>();
+            return await GetAll<Stewardess, StewardessDto>();
         }
 
-        public StewardessDto GetById(int id)
+        public async Task<StewardessDto> GetById(int id)
         {
-            return GetById<Stewardess, StewardessDto>(x => x.Id == id);
+            return await GetById<Stewardess, StewardessDto>(x => x.Id == id);
         }
 
-        public StewardessDto Create(StewardessDto entity)
+        public async Task<StewardessDto> Create(StewardessDto entity)
         {
-            return Create<StewardessDto, Stewardess>(entity);
+            return await Create<StewardessDto, Stewardess>(entity);
         }
 
-        public StewardessDto Update(StewardessDto entity)
+        public async Task<StewardessDto> Update(StewardessDto entity)
         {
-            return  Update<StewardessDto, Stewardess>(entity);
+            return await Update<StewardessDto, Stewardess>(entity);
         }
 
-        bool IStewardessService.Delete(int id)
+        async Task<bool> IStewardessService.Delete(int id)
         {
-            return Delete<Stewardess>(x => x.Id == id);
+            return await Delete<Stewardess>(x => x.Id == id);
         }
     }
 }

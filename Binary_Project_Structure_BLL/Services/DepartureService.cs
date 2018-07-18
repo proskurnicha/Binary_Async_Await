@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Binary_Project_Structure_BLL.Interfaces;
 using Binary_Project_Structure_DataAccess.Interfaces;
 using Binary_Project_Structure_DataAccess.Models;
@@ -14,29 +15,29 @@ namespace Binary_Project_Structure_BLL.Services
         {
 
         }
-        public List<DepartureDto> GetAll()
+        public async Task<List<DepartureDto>> GetAll()
         {
-            return GetAll<Departure, DepartureDto>();
+            return await GetAll<Departure, DepartureDto>();
         }
 
-        public DepartureDto GetById(int id)
+        public async Task<DepartureDto> GetById(int id)
         {
-            return GetById<Departure, DepartureDto>(x => x.Id == id);
+            return await GetById<Departure, DepartureDto>(x => x.Id == id);
         }
 
-        public DepartureDto Create(DepartureDto entity)
+        public async Task<DepartureDto> Create(DepartureDto entity)
         {
-            return Create<DepartureDto, Departure>(entity);
+            return await Create<DepartureDto, Departure>(entity);
         }
 
-        public DepartureDto Update(DepartureDto entity)
+        public async Task<DepartureDto> Update(DepartureDto entity)
         {
-            return Update<DepartureDto, Departure>(entity);
+            return await Update<DepartureDto, Departure>(entity);
         }
 
-        bool IDepartureService.Delete(int id)
+        async Task<bool> IDepartureService.Delete(int id)
         {
-            return Delete<Departure>(x => x.Id == id);
+            return await Delete<Departure>(x => x.Id == id);
         }
     }
 }

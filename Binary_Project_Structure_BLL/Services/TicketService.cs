@@ -7,6 +7,7 @@ using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Binary_Project_Structure_BLL.Services
 {
@@ -17,29 +18,29 @@ namespace Binary_Project_Structure_BLL.Services
 
         }
 
-        public List<TicketDto> GetAll()
+        public async Task<List<TicketDto>> GetAll()
         {
-            return GetAll<Ticket, TicketDto>();
+            return await GetAll<Ticket, TicketDto>();
         }
 
-        public TicketDto GetById(int id)
+        public async Task<TicketDto> GetById(int id)
         {
-            return GetById<Ticket, TicketDto>(x => x.Id == id);
+            return await GetById<Ticket, TicketDto>(x => x.Id == id);
         }
 
-        public TicketDto Create(TicketDto entity)
+        public async Task<TicketDto> Create(TicketDto entity)
         {
-            return Create<TicketDto, Ticket>(entity);
+            return await Create<TicketDto, Ticket>(entity);
         }
 
-        public TicketDto Update(TicketDto entity)
+        public async Task<TicketDto> Update(TicketDto entity)
         {
-            return Update<TicketDto, Ticket>(entity);
+            return await Update<TicketDto, Ticket>(entity);
         }
 
-        bool ITicketService.Delete(int id)
+        async Task<bool> ITicketService.Delete(int id)
         {
-            return Delete<Ticket>(x => x.Id == id);
+            return await Delete<Ticket>(x => x.Id == id);
         }
     }
 }

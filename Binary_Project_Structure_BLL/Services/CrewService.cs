@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Binary_Project_Structure_BLL.Interfaces;
 using Binary_Project_Structure_DataAccess.Interfaces;
 using Binary_Project_Structure_DataAccess.Models;
@@ -14,29 +15,29 @@ namespace Binary_Project_Structure_BLL.Services
         {
 
         }
-        public List<CrewDto> GetAll()
+        public async Task<List<CrewDto>> GetAll()
         {
-            return GetAll<Crew, CrewDto>();
+            return await GetAll<Crew, CrewDto>();
+        }          
+                   
+        public async Task<CrewDto> GetById(int id)
+        {          
+            return await GetById<Crew, CrewDto>(x => x.Id == id);
+        }          
+                   
+        public async Task<CrewDto> Create(CrewDto entity)
+        {          
+            return await Create<CrewDto, Crew>(entity);
+        }          
+                   
+        public async Task<CrewDto> Update(CrewDto entity)
+        {          
+            return await Update<CrewDto, Crew>(entity);
         }
 
-        public CrewDto GetById(int id)
+        async Task<bool> ICrewService.Delete(int id)
         {
-            return GetById<Crew, CrewDto>(x => x.Id == id);
-        }
-
-        public CrewDto Create(CrewDto entity)
-        {
-            return Create<CrewDto, Crew>(entity);
-        }
-
-        public CrewDto Update(CrewDto entity)
-        {
-            return Update<CrewDto, Crew>(entity);
-        }
-
-        bool ICrewService.Delete(int id)
-        {
-            return Delete<Crew>(x => x.Id == id);
+            return await Delete<Crew>(x => x.Id == id);
         }
     }
 }

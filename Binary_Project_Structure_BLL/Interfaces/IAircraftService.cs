@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Binary_Project_Structure_BLL.Interfaces
 {
     public interface IAircraftService
     {
-        List<AircraftDto> GetAll();
-        AircraftDto GetById(int id);
-        AircraftDto Create(AircraftDto entity);
-        AircraftDto Update(AircraftDto entity);
-        bool Delete(int id);
+        Task<List<AircraftDto>> GetAll();
+        Task<AircraftDto> GetById(int id);
+        Task<AircraftDto> Create(AircraftDto entity);
+        Task<AircraftDto> Update(AircraftDto entity);
+        Task<bool> Delete(int id);
     }
 }

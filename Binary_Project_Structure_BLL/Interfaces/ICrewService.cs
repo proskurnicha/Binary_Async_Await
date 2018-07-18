@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Binary_Project_Structure_BLL.Interfaces
 {
     public interface ICrewService
     {
-        List<CrewDto> GetAll();
-        CrewDto GetById(int id);
-        CrewDto Create(CrewDto entity);
-        CrewDto Update(CrewDto entity);
-        bool Delete(int id);
+        Task<List<CrewDto>> GetAll();
+        Task<CrewDto> GetById(int id);
+        Task<CrewDto> Create(CrewDto entity);
+        Task<CrewDto> Update(CrewDto entity);
+        Task<bool> Delete(int id);
     }
 }

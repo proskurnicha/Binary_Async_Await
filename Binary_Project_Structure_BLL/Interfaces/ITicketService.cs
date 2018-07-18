@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Binary_Project_Structure_BLL.Interfaces
 {
     public interface ITicketService
     {
-        List<TicketDto> GetAll();
-        TicketDto GetById(int id);
-        TicketDto Create(TicketDto entity);
-        TicketDto Update(TicketDto entity);
-        bool Delete(int id);
+        Task<List<TicketDto>> GetAll();
+        Task<TicketDto> GetById(int id);
+        Task<TicketDto> Create(TicketDto entity);
+        Task<TicketDto> Update(TicketDto entity);
+        Task<bool> Delete(int id);
     }
 }
