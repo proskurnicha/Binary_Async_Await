@@ -30,9 +30,9 @@ namespace Binary_Project_Structur.Tests.Fake
             return 0;
         }
 
-        public Task<int> SaveChagesAsync()
+        public async Task<int> SaveChagesAsync()
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
         TEntity IUnitOfWork.Set<TEntity>()
@@ -66,7 +66,7 @@ namespace Binary_Project_Structur.Tests.Fake
             if (repTicket is TEntity)
                 return new IFakeRepository<Ticket>() as TEntity;
 
-            var repTypeAircraft= new IFakeRepository<TypeAircraft>();
+            var repTypeAircraft = new IFakeRepository<TypeAircraft>();
             if (repTypeAircraft is TEntity)
                 return new IFakeRepository<TypeAircraft>() as TEntity;
 

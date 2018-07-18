@@ -14,13 +14,15 @@ namespace Binary_Project_Structur.Tests.Fake
         {
             throw new NotImplementedException();
         }
-
-        public TEntity Create(TEntity entity)
+                          
+       
+        Task<List<TEntity>> IRepository<TEntity>.GetAll()
         {
-            return entity;
+            throw new NotImplementedException();
+
         }
 
-        public bool Delete(Func<TEntity, bool> prEntity = null)
+        public Task<TEntity> GetById(Expression<Func<TEntity, bool>> filter)
         {
             throw new NotImplementedException();
         }
@@ -30,39 +32,14 @@ namespace Binary_Project_Structur.Tests.Fake
             throw new NotImplementedException();
         }
 
-        public List<TEntity> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public TEntity GetById(Func<TEntity, bool> filter = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<TEntity> GetById(Expression<Func<TEntity, bool>> filter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TEntity Update(TEntity entity)
+        async Task<TEntity> IRepository<TEntity>.Create(TEntity entity)
         {
             return entity;
         }
 
-        Task<TEntity> IRepository<TEntity>.Create(TEntity entity)
+        async Task<TEntity> IRepository<TEntity>.Update(TEntity entity)
         {
-            throw new NotImplementedException();
-        }
-
-        Task<List<TEntity>> IRepository<TEntity>.GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<TEntity> IRepository<TEntity>.Update(TEntity entity)
-        {
-            throw new NotImplementedException();
+            return entity;
         }
     }
 }

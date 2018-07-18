@@ -53,9 +53,9 @@ namespace Binary_Project_Structure.Controllers
             {
                 return NotFound();
             }
-            Parallel.Invoke(
-                () => { service.AddRange(crewsByApiDto); },
-                () =>
+            Task.WaitAll(
+                new Task(() => { service.AddRange(crewsByApiDto); }),
+                new Task(() =>
                 {
                     string format = "d_MMM_yyyy_h_mm_ss";
                     string path = "log_" + DateTime.Now.ToString(format) + ".csv";
@@ -65,8 +65,7 @@ namespace Binary_Project_Structure.Controllers
                             streamWriter.Write(formatter.ToCsv(current))
                         );
                     }
-                }
-                );
+                }));            
             return Ok();
         }
 
