@@ -22,16 +22,16 @@ namespace Binary_Project_Structure.Controllers
 
         // GET: api/TypesAircraft
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok(service.GetAll());
+            return Ok(await service.GetAll());
         }
 
         // GET: api/TypesAircraft/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            TypeAircraftDto TypeAircraft = service.GetById(id);
+            TypeAircraftDto TypeAircraft = await service.GetById(id);
             if (TypeAircraft == null)
             {
                 return NotFound();
@@ -41,7 +41,7 @@ namespace Binary_Project_Structure.Controllers
 
         // POST: api/TypesAircraft
         [HttpPost]
-        public IActionResult Post([FromBody]TypeAircraftDto TypeAircraft)
+        public async Task<IActionResult> Post([FromBody]TypeAircraftDto TypeAircraft)
         {
             if (TypeAircraft == null)
             {
@@ -52,14 +52,14 @@ namespace Binary_Project_Structure.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            service.Create(TypeAircraft);
+            await service.Create(TypeAircraft);
 
             return Created("api/TypesAircrafts", TypeAircraft);
         }
 
         // PUT: api/TypesAircraft/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]TypeAircraftDto TypeAircraft)
+        public async Task<IActionResult> Put(int id, [FromBody]TypeAircraftDto TypeAircraft)
         {
             if (TypeAircraft == null)
             {
@@ -70,16 +70,16 @@ namespace Binary_Project_Structure.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            service.Update(TypeAircraft);
+            await service.Update(TypeAircraft);
 
             return Ok(TypeAircraft);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            bool result = service.Delete(id);
+            bool result = await service.Delete(id);
 
             if (!result)
                 return NotFound();

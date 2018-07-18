@@ -22,16 +22,16 @@ namespace Binary_Project_Structure.Controllers
 
         // GET: api/Aircrafts
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok(service.GetAll());
+            return Ok(await service.GetAll());
         }
 
         // GET: api/Aircrafts/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            AircraftDto Aircraft = service.GetById(id);
+            AircraftDto Aircraft = await service.GetById(id);
             if (Aircraft == null)
             {
                 return NotFound();
@@ -41,7 +41,7 @@ namespace Binary_Project_Structure.Controllers
 
         // POST: api/Aircrafts
         [HttpPost]
-        public IActionResult Post([FromBody]AircraftDto Aircraft)
+        public async Task<IActionResult> Post([FromBody]AircraftDto Aircraft)
         {
             if (Aircraft == null)
             {
@@ -52,14 +52,14 @@ namespace Binary_Project_Structure.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            service.Create(Aircraft);
+            await service.Create(Aircraft);
 
             return Created("api/Aircrafts", Aircraft);
         }
 
         // PUT: api/Aircrafts/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]AircraftDto Aircraft)
+        public async Task<IActionResult> Put(int id, [FromBody]AircraftDto Aircraft)
         {
             if (Aircraft == null)
             {
@@ -70,16 +70,16 @@ namespace Binary_Project_Structure.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            service.Update(Aircraft);
+            await service.Update(Aircraft);
 
             return Ok(Aircraft);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            bool result = service.Delete(id);
+            bool result = await service.Delete(id);
 
             if (!result)
                 return NotFound();

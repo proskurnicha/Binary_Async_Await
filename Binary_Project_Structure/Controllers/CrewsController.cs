@@ -22,16 +22,16 @@ namespace Binary_Project_Structure.Controllers
 
         // GET: api/Crews
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok(service.GetAll());
+            return Ok(await service.GetAll());
         }
 
         // GET: api/Crews/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            CrewDto Crew = service.GetById(id);
+            CrewDto Crew =  await service.GetById(id);
             if (Crew == null)
             {
                 return NotFound();
@@ -41,7 +41,7 @@ namespace Binary_Project_Structure.Controllers
 
         // POST: api/Crews
         [HttpPost]
-        public IActionResult Post([FromBody]CrewDto Crew)
+        public async Task<IActionResult> Post([FromBody]CrewDto Crew)
         {
             if (Crew == null)
             {
@@ -52,14 +52,14 @@ namespace Binary_Project_Structure.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            service.Create(Crew);
+            await service.Create(Crew);
 
             return Created("api/Crews", Crew);
         }
 
         // PUT: api/Crews/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]CrewDto Crew)
+        public async Task<IActionResult> Put(int id, [FromBody]CrewDto Crew)
         {
             if (Crew == null)
             {
@@ -70,16 +70,16 @@ namespace Binary_Project_Structure.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            service.Update(Crew);
+            await service.Update(Crew);
 
             return Ok(Crew);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            bool result = service.Delete(id);
+            bool result = await service.Delete(id);
 
             if (!result)
                 return NotFound();

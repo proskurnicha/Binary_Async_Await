@@ -22,16 +22,16 @@ namespace Binary_Project_Structure.Controllers
 
         // GET: api/Pilots
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok(service.GetAll());
+            return Ok(await service.GetAll());
         }
 
         // GET: api/Pilots/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            PilotDto Pilot = service.GetById(id);
+            PilotDto Pilot = await service.GetById(id);
             if (Pilot == null)
             {
                 return NotFound();
@@ -41,7 +41,7 @@ namespace Binary_Project_Structure.Controllers
 
         // POST: api/Pilots
         [HttpPost]
-        public IActionResult Post([FromBody]PilotDto Pilot)
+        public async Task<IActionResult> Post([FromBody]PilotDto Pilot)
         {
             if (Pilot == null)
             {
@@ -52,14 +52,14 @@ namespace Binary_Project_Structure.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            service.Create(Pilot);
+            await service.Create(Pilot);
 
             return Created("api/Pilots", Pilot);
         }
 
         // PUT: api/Pilots/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]PilotDto Pilot)
+        public async Task<IActionResult> Put(int id, [FromBody]PilotDto Pilot)
         {
             if (Pilot == null)
             {
@@ -70,16 +70,16 @@ namespace Binary_Project_Structure.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            service.Update(Pilot);
+            await service.Update(Pilot);
 
             return Ok(Pilot);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            bool result = service.Delete(id);
+            bool result = await service.Delete(id);
 
             if (!result)
                 return NotFound();

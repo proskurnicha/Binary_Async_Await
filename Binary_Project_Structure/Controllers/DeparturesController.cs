@@ -22,16 +22,16 @@ namespace Binary_Project_Structure.Controllers
 
         // GET: api/Departures
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok(service.GetAll());
+            return Ok(await service.GetAll());
         }
 
         // GET: api/Departures/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            DepartureDto Departure = service.GetById(id);
+            DepartureDto Departure = await service.GetById(id);
             if (Departure == null)
             {
                 return NotFound();
@@ -41,7 +41,7 @@ namespace Binary_Project_Structure.Controllers
 
         // POST: api/Departures
         [HttpPost]
-        public IActionResult Post([FromBody]DepartureDto Departure)
+        public async Task<IActionResult> Post([FromBody]DepartureDto Departure)
         {
             if (Departure == null)
             {
@@ -52,14 +52,14 @@ namespace Binary_Project_Structure.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            service.Create(Departure);
+            await service.Create(Departure);
 
             return Created("api/Departures", Departure);
         }
 
         // PUT: api/Departures/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]DepartureDto Departure)
+        public async Task<IActionResult> Put(int id, [FromBody]DepartureDto Departure)
         {
             if (Departure == null)
             {
@@ -70,16 +70,16 @@ namespace Binary_Project_Structure.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            service.Update(Departure);
+            await service.Update(Departure);
 
             return Ok(Departure);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            bool result = service.Delete(id);
+            bool result = await service.Delete(id);
 
             if (!result)
                 return NotFound();
