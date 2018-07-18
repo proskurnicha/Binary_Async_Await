@@ -53,10 +53,10 @@ namespace Binary_Project_Structure.Controllers
             {
                 return NotFound();
             }
-            //Parallel.Invoke(
-            //    () => { service.AddRange(crewsByApiDto); },
-            //    () =>
-            //    {
+            Parallel.Invoke(
+                () => { service.AddRange(crewsByApiDto); },
+                () =>
+                {
                     string format = "d_MMM_yyyy_h_mm_ss";
                     string path = "log_" + DateTime.Now.ToString(format) + ".csv";
                     using (StreamWriter streamWriter = new StreamWriter(new FileStream(path, FileMode.Create)))
@@ -65,10 +65,8 @@ namespace Binary_Project_Structure.Controllers
                             streamWriter.Write(formatter.ToCsv(current))
                         );
                     }
-                //}
-                //);
-
-           
+                }
+                );
             return Ok();
         }
 

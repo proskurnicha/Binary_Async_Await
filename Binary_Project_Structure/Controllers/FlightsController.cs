@@ -8,6 +8,7 @@ using Binary_Project_Structure_BLL.Interfaces;
 using Binary_Project_Structure_BLL.Services;
 using Binary_Project_Structure_Shared.DTOs;
 using Binary_Project_Structure_DataAccess.Models;
+using Binary_Project_Structure_BLL.Helpers;
 
 namespace Binary_Project_Structure.Controllers
 {
@@ -16,7 +17,7 @@ namespace Binary_Project_Structure.Controllers
     public class FlightsController : Controller
     {
         IFlightService service;
-
+        Helper helper = new Helper();
         public FlightsController(IFlightService service)
         {
             this.service = service;
@@ -26,6 +27,8 @@ namespace Binary_Project_Structure.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
+            string result = await helper.DoWork();
+            Console.WriteLine(result);
             return Ok(await service.GetAll());
         }
 
