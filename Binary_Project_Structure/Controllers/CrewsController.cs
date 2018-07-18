@@ -53,19 +53,20 @@ namespace Binary_Project_Structure.Controllers
             {
                 return NotFound();
             }
-            Task.WaitAll(
-                new Task(() => { service.AddRange(crewsByApiDto); }),
-                new Task(() =>
-                {
-                    string format = "d_MMM_yyyy_h_mm_ss";
-                    string path = "log_" + DateTime.Now.ToString(format) + ".csv";
-                    using (StreamWriter streamWriter = new StreamWriter(new FileStream(path, FileMode.Create)))
-                    {
-                        Parallel.ForEach(crewsByApiDto, current =>
-                            streamWriter.Write(formatter.ToCsv(current))
-                        );
-                    }
-                }));            
+            Task[] tasks = new Task[2];
+            tasks[0] = (Task.Run(() => service.AddRange(crewsByApiDto)));
+            tasks[1] = (Task.Run(() =>
+             {
+                 string format = "d_MMM_yyyy_h_mm_ss";
+                 string path = "log_" + DateTime.Now.ToString(format) + ".csv";
+                 using (StreamWriter streamWriter = new StreamWriter(new FileStream(path, FileMode.Create)))
+                 {
+                     Parallel.ForEach(crewsByApiDto, current =>
+                         streamWriter.Write(formatter.ToCsv(current))
+                     );
+                 }
+             }));
+            Task.WaitAll(tasks);
             return Ok();
         }
 
