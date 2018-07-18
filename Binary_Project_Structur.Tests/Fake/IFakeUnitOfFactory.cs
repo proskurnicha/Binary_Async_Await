@@ -3,6 +3,7 @@ using Binary_Project_Structure_DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Binary_Project_Structur.Tests.Fake
 {
@@ -29,6 +30,10 @@ namespace Binary_Project_Structur.Tests.Fake
             return 0;
         }
 
+        public Task<int> SaveChagesAsync()
+        {
+            throw new NotImplementedException();
+        }
 
         TEntity IUnitOfWork.Set<TEntity>()
         {

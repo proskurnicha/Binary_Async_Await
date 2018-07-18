@@ -14,7 +14,7 @@ namespace Binary_Project_Structure_BLL.Services
 {
     public class Service : IServiceCommon
     {
-        IMapper iMapper;
+        public IMapper iMapper;
         public IUnitOfWork context { get; private set; }
 
         public Service(IUnitOfWork context)
@@ -40,11 +40,11 @@ namespace Binary_Project_Structure_BLL.Services
         public async Task<TEntityDto> Update<TEntityDto, TEntity>(TEntityDto entityDto) where TEntity : class
         {
             TEntity entity = iMapper.Map<TEntityDto, TEntity>(entityDto);
-            
+
             if (entity == null)
                 throw new NullReferenceException();
 
-            TEntityDto entitySaved = iMapper.Map<TEntity, TEntityDto> (await context.Set<IRepository<TEntity>>().Update(entity));
+            TEntityDto entitySaved = iMapper.Map<TEntity, TEntityDto>(await context.Set<IRepository<TEntity>>().Update(entity));
             return entitySaved;
         }
 
@@ -67,5 +67,18 @@ namespace Binary_Project_Structure_BLL.Services
             bool result = await context.Set<IRepository<TEntity>>().Delete(prEntity);
             return result;
         }
+
+        //public async Task<int> AddRange<TEntityByIdDto, TEntity>(List<TEntityByIdDto> entitiesDto) where TEntity : class
+        //{
+        //    return 0;
+        //    //List<TEntity> entities = iMapper.Map<List<TEntityByIdDto>, List<TEntity>>(entitiesDto);
+
+        //    //if (entities == null)
+        //    //    throw new NullReferenceException();
+
+        //    //int result = await context.Set<IRepository<TEntity>>().AddRange(entities);
+
+        //    //return result;
+        //}
     }
 }

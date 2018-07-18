@@ -69,5 +69,11 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             context.SaveChanges();
             return true;
         }
+
+        public async virtual Task<int> AddRange(List<TEntity> entities)
+        {
+            return 0;
+        }
+
     }
 }

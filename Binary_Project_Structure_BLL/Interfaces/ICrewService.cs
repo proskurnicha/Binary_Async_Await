@@ -13,5 +13,6 @@ namespace Binary_Project_Structure_BLL.Interfaces
         Task<CrewDto> Create(CrewDto entity);
         Task<CrewDto> Update(CrewDto entity);
         Task<bool> Delete(int id);
+        Task AddRange(List<CrewByApiDto> entity);
     }
 }

@@ -12,6 +12,7 @@ namespace Binary_Project_Structure_DataAccess
         public DatabaseContext()
         {
             Database.EnsureCreated();
+            //Database.Migrate();
         }
         public DbSet<Aircraft> Aircraft { get; set; }
         public DbSet<Crew> Crew { get; set; }

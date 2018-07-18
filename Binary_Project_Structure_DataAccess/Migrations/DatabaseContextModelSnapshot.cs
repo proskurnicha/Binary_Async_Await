@@ -23,7 +23,6 @@ namespace Binary_Project_Structure_DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(3)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AircraftName")
@@ -33,8 +32,7 @@ namespace Binary_Project_Structure_DataAccess.Migrations
 
                     b.Property<TimeSpan>("Lifetime");
 
-                    b.Property<int>("TypeAircraftId")
-                        .HasMaxLength(3);
+                    b.Property<int>("TypeAircraftId");
 
                     b.HasKey("Id");
 
@@ -52,11 +50,9 @@ namespace Binary_Project_Structure_DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(3)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("PilotId")
-                        .HasMaxLength(3);
+                    b.Property<int>("PilotId");
 
                     b.HasKey("Id");
 
@@ -75,19 +71,15 @@ namespace Binary_Project_Structure_DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(3)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AircraftId")
-                        .HasMaxLength(3);
+                    b.Property<int>("AircraftId");
 
-                    b.Property<int>("CrewId")
-                        .HasMaxLength(3);
+                    b.Property<int>("CrewId");
 
                     b.Property<DateTime>("DepartureTime");
 
-                    b.Property<int>("FlightId")
-                        .HasMaxLength(3);
+                    b.Property<int>("FlightId");
 
                     b.HasKey("Id");
 
@@ -110,7 +102,6 @@ namespace Binary_Project_Structure_DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(3)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ArrivalPoint")
@@ -138,7 +129,6 @@ namespace Binary_Project_Structure_DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(3)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateBirth");
@@ -166,10 +156,9 @@ namespace Binary_Project_Structure_DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(3)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CrewId");
+                    b.Property<int>("CrewId");
 
                     b.Property<DateTime>("DateBirth");
 
@@ -186,9 +175,9 @@ namespace Binary_Project_Structure_DataAccess.Migrations
                     b.ToTable("Stewardess");
 
                     b.HasData(
-                        new { Id = 1, DateBirth = new DateTime(1990, 12, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), Name = "Natali", Surname = "Sidorova" },
-                        new { Id = 2, DateBirth = new DateTime(1995, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), Name = "Kate", Surname = "Petrova" },
-                        new { Id = 3, DateBirth = new DateTime(1993, 7, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), Name = "Tanya", Surname = "Durova" }
+                        new { Id = 1, CrewId = 1, DateBirth = new DateTime(1990, 12, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), Name = "Natali", Surname = "Sidorova" },
+                        new { Id = 2, CrewId = 2, DateBirth = new DateTime(1995, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), Name = "Kate", Surname = "Petrova" },
+                        new { Id = 3, CrewId = 1, DateBirth = new DateTime(1993, 7, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), Name = "Tanya", Surname = "Durova" }
                     );
                 });
 
@@ -196,11 +185,9 @@ namespace Binary_Project_Structure_DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(3)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FlightId")
-                        .HasMaxLength(3);
+                    b.Property<int>("FlightId");
 
                     b.Property<double>("Price");
 
@@ -221,7 +208,6 @@ namespace Binary_Project_Structure_DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(3)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AircraftModel");
@@ -276,9 +262,10 @@ namespace Binary_Project_Structure_DataAccess.Migrations
 
             modelBuilder.Entity("Binary_Project_Structure_DataAccess.Models.Stewardess", b =>
                 {
-                    b.HasOne("Binary_Project_Structure_DataAccess.Models.Crew")
+                    b.HasOne("Binary_Project_Structure_DataAccess.Models.Crew", "Crew")
                         .WithMany("Stewardesses")
-                        .HasForeignKey("CrewId");
+                        .HasForeignKey("CrewId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Binary_Project_Structure_DataAccess.Models.Ticket", b =>

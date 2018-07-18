@@ -44,6 +44,7 @@ namespace Binary_Project_Structure
             services.AddTransient<ITicketService, TicketService>();
             services.AddTransient<ITypeAircraftService, TypeAircraftService>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IParceService, ParceService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

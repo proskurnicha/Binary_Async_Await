@@ -33,5 +33,12 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             crew.Stewardesses = entity.Stewardesses;
             return crew;
         }
+
+        public async override Task<int> AddRange(List<Crew> entities)
+        {
+            await context.Set<Crew>().AddRangeAsync(entities);
+            int result = context.SaveChanges();
+            return result ;
+        }
     }
 }

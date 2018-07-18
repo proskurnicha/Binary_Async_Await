@@ -17,32 +17,6 @@ namespace Binary_Project_Structure_DataAccess
 
         public void Initialize()
         {
-            #region Stewardesses
-            modelBuilder.Entity<Stewardess>().HasData(
-                  new Stewardess()
-                  {
-                      Id = 1,
-                      Name = "Natali",
-                      Surname = "Sidorova",
-                      DateBirth = new DateTime(1990, 12, 4)
-                  },
-                 new Stewardess()
-                 {
-                     Id = 2,
-                     Name = "Kate",
-                     Surname = "Petrova",
-                     DateBirth = new DateTime(1995, 5, 15)
-                 },
-                 new Stewardess()
-                 {
-                     Id = 3,
-                     Name = "Tanya",
-                     Surname = "Durova",
-                     DateBirth = new DateTime(1993, 7, 26)
-                 }
-                );
-            #endregion
-
             #region TypesAircraft
             modelBuilder.Entity<TypeAircraft>().HasData(
                 new TypeAircraft()
@@ -51,7 +25,6 @@ namespace Binary_Project_Structure_DataAccess
                     AircraftModel = AircraftModel.IL_96_300,
                     NumberPlaces = 797,
                     CarryingCapacity = 240000
-
                 },
                 new TypeAircraft()
                 {
@@ -63,6 +36,22 @@ namespace Binary_Project_Structure_DataAccess
                 );
             #endregion
 
+            #region Aircrafts
+            modelBuilder.Entity<Aircraft>().HasData(
+                new Aircraft()
+                {
+                    Id = 1,
+                    TypeAircraftId = 1,
+                    AircraftName = "Star",
+                },
+               new Aircraft()
+               {
+                   Id = 2,
+                   TypeAircraftId = 2,
+                   AircraftName = "Cometa",
+               });
+            #endregion
+
             #region Pilots
             modelBuilder.Entity<Pilot>().HasData(
                 new Pilot()
@@ -71,7 +60,7 @@ namespace Binary_Project_Structure_DataAccess
                     Name = "Ivan",
                     Surname = "Ivanov",
                     DateBirth = new DateTime(1990, 12, 4),
-                    Experience = 5
+                    Experience = 5,
                 },
                  new Pilot()
                  {
@@ -79,7 +68,7 @@ namespace Binary_Project_Structure_DataAccess
                      Name = "Petr",
                      Surname = "Petrov",
                      DateBirth = new DateTime(1995, 5, 15),
-                     Experience = 10
+                     Experience = 10,
                  },
                  new Pilot()
                  {
@@ -87,10 +76,60 @@ namespace Binary_Project_Structure_DataAccess
                      Name = "Sidr",
                      Surname = "Sidorov",
                      DateBirth = new DateTime(1993, 7, 26),
-                     Experience = 7
+                     Experience = 7,
                  });
             #endregion
 
+            #region Crews
+            modelBuilder.Entity<Crew>().HasData(
+               new Crew()
+               {
+                   Id = 1,
+                   PilotId = 1,
+
+               },
+               new Crew()
+               {
+                   Id = 2,
+                   PilotId = 1
+               },
+               new Crew()
+               {
+                   Id = 3,
+                   PilotId = 1
+               }
+              );
+            #endregion
+
+            #region Stewardesses
+            modelBuilder.Entity<Stewardess>().HasData(
+                  new Stewardess()
+                  {
+                      Id = 1,
+                      Name = "Natali",
+                      Surname = "Sidorova",
+                      DateBirth = new DateTime(1990, 12, 4),
+                      CrewId = 1
+                  },
+                 new Stewardess()
+                 {
+                     Id = 2,
+                     Name = "Kate",
+                     Surname = "Petrova",
+                     DateBirth = new DateTime(1995, 5, 15),
+                     CrewId = 2
+                 },
+                 new Stewardess()
+                 {
+                     Id = 3,
+                     Name = "Tanya",
+                     Surname = "Durova",
+                     DateBirth = new DateTime(1993, 7, 26),
+                     CrewId = 1
+                 }
+                );
+            #endregion
+            
             #region Flights
             modelBuilder.Entity<Flight>().HasData(
                new Flight()
@@ -118,22 +157,6 @@ namespace Binary_Project_Structure_DataAccess
                 ArrivalTime = new TimeSpan(3, 15, 0),
             }
               );
-            #endregion
-
-            #region Aircrafts
-            modelBuilder.Entity<Aircraft>().HasData(
-                new Aircraft()
-                {
-                    Id = 1,
-                    TypeAircraftId = 1,
-                    AircraftName = "Star",
-                },
-               new Aircraft()
-               {
-                   Id = 2,
-                   TypeAircraftId = 2,
-                   AircraftName = "Cometa",
-               });
             #endregion
 
             #region Tickets
@@ -188,26 +211,6 @@ namespace Binary_Project_Structure_DataAccess
               );
             #endregion
 
-
-            #region Crews
-            modelBuilder.Entity<Crew>().HasData(
-               new Crew()
-               {
-                   Id = 1,
-                   PilotId = 1,
-               },
-               new Crew()
-               {
-                   Id = 2,
-                   PilotId = 1
-               },
-               new Crew()
-               {
-                   Id = 3,
-                   PilotId = 1
-               }
-              );
-            #endregion
         }
     }
 }

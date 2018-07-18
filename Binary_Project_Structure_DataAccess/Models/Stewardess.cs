@@ -8,9 +8,8 @@ namespace Binary_Project_Structure_DataAccess.Models
     public class Stewardess
     {
         [Required]
-        [StringLength(3, MinimumLength = 6, ErrorMessage = "Unacceptable id")]
         public int Id { get; set; }
-
+             
         [Required]
         public string Name { get; set; }
 
@@ -19,5 +18,11 @@ namespace Binary_Project_Structure_DataAccess.Models
 
         [Required]
         public DateTime DateBirth { get; set; }
+
+        [Required]
+        public Crew Crew { get; set; }
+
+        [Required]
+        public int CrewId { get; set; }
     }
 }

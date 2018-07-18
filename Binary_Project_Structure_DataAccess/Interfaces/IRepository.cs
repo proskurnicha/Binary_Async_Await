@@ -18,5 +18,7 @@ namespace Binary_Project_Structure_DataAccess.Interfaces
 
         Task<bool> Delete(Expression<Func<TEntity, bool>> prEntity);
 
+        Task<int> AddRange(List<TEntity> entities);
+
     }
 }

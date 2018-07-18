@@ -19,5 +19,8 @@ namespace Binary_Project_Structure_BLL.Interfaces
         Task<TEntityDto> Create<TEntityDto, TEntity>(TEntityDto entityDto) where TEntity : class;
 
         Task<bool> Delete<TEntity>(Expression<Func<TEntity, bool>> prEntity) where TEntity : class;
+
+        //Task<int> AddRange<TEntityByIdDto, TEntity>(List<TEntityByIdDto> entitiesDto) where TEntity : class;
+
     }
 }

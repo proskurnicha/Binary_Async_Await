@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Binary_Project_Structure_BLL.Interfaces;
+using Binary_Project_Structure_BLL.Services;
 using Binary_Project_Structure_Shared.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +16,12 @@ namespace Binary_Project_Structure.Controllers
     public class CrewsController : Controller
     {
         ICrewService service;
-
-        public CrewsController(ICrewService service)
+        IParceService parceService;
+        FormatterForCrewService formatter = new FormatterForCrewService();
+        public CrewsController(ICrewService service, IParceService parceService)
         {
             this.service = service;
+            this.parceService = parceService;
         }
 
         // GET: api/Crews
@@ -31,12 +35,41 @@ namespace Binary_Project_Structure.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            CrewDto Crew =  await service.GetById(id);
+            CrewDto Crew = await service.GetById(id);
             if (Crew == null)
             {
                 return NotFound();
             }
             return Ok(Crew);
+        }
+
+        // GET: api/Crews/GetTen
+        [HttpGet]
+        [Route("GetTen")]
+        public async Task<IActionResult> GetTen()
+        {
+            List<CrewByApiDto> crewsByApiDto = await parceService.GetCrews();
+            if (crewsByApiDto == null)
+            {
+                return NotFound();
+            }
+            //Parallel.Invoke(
+            //    () => { service.AddRange(crewsByApiDto); },
+            //    () =>
+            //    {
+                    string format = "d_MMM_yyyy_h_mm_ss";
+                    string path = "log_" + DateTime.Now.ToString(format) + ".csv";
+                    using (StreamWriter streamWriter = new StreamWriter(new FileStream(path, FileMode.Create)))
+                    {
+                        Parallel.ForEach(crewsByApiDto, current =>
+                            streamWriter.Write(formatter.ToCsv(current))
+                        );
+                    }
+                //}
+                //);
+
+           
+            return Ok();
         }
 
         // POST: api/Crews
