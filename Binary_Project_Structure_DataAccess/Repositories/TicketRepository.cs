@@ -19,9 +19,10 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             if (ticket == null)
                 return null;
 
-            ticket.Price = entity.Price;
-            ticket.FlightId = entity.FlightId;
-            ticket.Flight = context.Set<Flight>().Where(flight => flight.Id == entity.FlightId).FirstOrDefault();
+            context.Set<Ticket>().FirstOrDefault(filter).Price = entity.Price;
+            context.Set<Ticket>().FirstOrDefault(filter).FlightId = entity.FlightId;
+            context.Set<Ticket>().FirstOrDefault(filter).Flight = context.Set<Flight>().Where(flight => flight.Id == entity.FlightId).FirstOrDefault();
+            await context.SaveChangesAsync();
             return ticket;
         }
     }

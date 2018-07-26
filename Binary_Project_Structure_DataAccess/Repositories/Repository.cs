@@ -63,9 +63,7 @@ namespace Binary_Project_Structure_DataAccess.Repositories
 
             if (entity == null)
                 return false;
-
-            List<TEntity> entities = await context.Set<TEntity>().ToListAsync();
-            entities.Remove(entity);
+            context.Set<TEntity>().Remove(entity);
             context.SaveChanges();
             return true;
         }

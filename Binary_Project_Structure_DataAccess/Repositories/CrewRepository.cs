@@ -17,6 +17,16 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             return await context.Set<Crew>().Include(s => s.Stewardesses).ToListAsync();
         }
 
+        public async override Task<Crew> GetById(Expression<Func<Crew, bool>> filter)
+        {
+            Crew query = await context.Set<Crew> ().Include(s => s.Stewardesses).FirstOrDefaultAsync(filter);
+
+            if (query == null)
+                return null;
+
+            return query;
+        }
+
         public async override Task<Crew> Update(Crew entity)
         {
             Expression<Func<Crew, bool>>filter = x => x.Id == entity.Id;
@@ -25,12 +35,11 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             if (crew == null)
                 return null;
 
-            crew.PilotId = entity.PilotId;
-            var query = await context.Set<Pilot>().FirstOrDefaultAsync(x => x.Id == entity.PilotId);
-
-            crew.Pilot = await context.Set<Pilot>().FirstOrDefaultAsync(x => x.Id == entity.PilotId);
-
-            crew.Stewardesses = entity.Stewardesses;
+            context.Set<Crew>().FirstOrDefault(filter).Id = entity.Id;
+            var pilot = await context.Set<Pilot>().FirstOrDefaultAsync(x => x.Id == entity.PilotId);
+            context.Set<Crew>().FirstOrDefault(filter).Pilot = pilot;
+            context.Set<Crew>().FirstOrDefault(filter).PilotId = entity.PilotId;
+            await context.SaveChangesAsync();
             return crew;
         }
 

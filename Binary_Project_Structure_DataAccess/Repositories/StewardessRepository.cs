@@ -5,6 +5,7 @@ using Binary_Project_Structure_DataAccess.Repositories;
 using Binary_Project_Structure_DataAccess.Models;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Binary_Project_Structure_DataAccess.Repositories
 {
@@ -18,9 +19,10 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             if (stewardess == null)
                 return null;
 
-            stewardess.DateBirth = entity.DateBirth;
-            stewardess.Name = entity.Name;
-            stewardess.Surname = entity.Surname;
+            context.Set<Stewardess>().FirstOrDefault(filter).DateBirth = entity.DateBirth;
+            context.Set<Stewardess>().FirstOrDefault(filter).Name = entity.Name;
+            context.Set<Stewardess>().FirstOrDefault(filter).Surname = entity.Surname;
+            await context.SaveChangesAsync();
             return stewardess;
         }
     }

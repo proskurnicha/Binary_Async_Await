@@ -9,6 +9,7 @@ using Binary_Project_Structure_BLL.Services;
 using Binary_Project_Structure_Shared.DTOs;
 using Binary_Project_Structure_DataAccess.Models;
 using Binary_Project_Structure_BLL.Helpers;
+using Microsoft.AspNetCore.Cors;
 
 namespace Binary_Project_Structure.Controllers
 {

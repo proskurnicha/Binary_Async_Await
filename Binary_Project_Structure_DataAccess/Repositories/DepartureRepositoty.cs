@@ -19,14 +19,14 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             if (departure == null)
                 return null;
 
-            departure.AircraftId = entity.AircraftId;
-            departure.Aircraft  = context.Set<Aircraft>().Where(x => x.Id == entity.AircraftId).FirstOrDefault();
-            departure.CrewId = entity.CrewId;
-            departure.Crew = context.Set<Crew>().Where(x => x.Id == entity.CrewId).FirstOrDefault();
-            departure.DepartureTime = entity.DepartureTime;
-            departure.FlightId = entity.FlightId;
-            departure.Flight = context.Set<Flight>().Where(x => x.Id == entity.FlightId).FirstOrDefault();
-
+            context.Set<Departure>().FirstOrDefault(filter).AircraftId = entity.AircraftId;
+            context.Set<Departure>().FirstOrDefault(filter).Aircraft  = context.Set<Aircraft>().Where(x => x.Id == entity.AircraftId).FirstOrDefault();
+            context.Set<Departure>().FirstOrDefault(filter).CrewId = entity.CrewId;
+            context.Set<Departure>().FirstOrDefault(filter).Crew = context.Set<Crew>().Where(x => x.Id == entity.CrewId).FirstOrDefault();
+            context.Set<Departure>().FirstOrDefault(filter).DepartureTime = entity.DepartureTime;
+            context.Set<Departure>().FirstOrDefault(filter).FlightId = entity.FlightId;
+            context.Set<Departure>().FirstOrDefault(filter).Flight = context.Set<Flight>().Where(x => x.Id == entity.FlightId).FirstOrDefault();
+            await context.SaveChangesAsync();
             return departure;
         }
     }

@@ -18,12 +18,12 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             if (aircraft == null)
                 return null;
 
-            aircraft.AircraftName = entity.AircraftName;
-            aircraft.DateRelease = entity.DateRelease;
-            aircraft.Lifetime = entity.Lifetime;
-            aircraft.TypeAircraftId = entity.TypeAircraftId;
-            aircraft.TypeAircraft = context.Set<TypeAircraft>().Where(x => x.Id == entity.TypeAircraftId).FirstOrDefault();
-
+            context.Set<Aircraft>().FirstOrDefault(filter).AircraftName = entity.AircraftName;
+            context.Set<Aircraft>().FirstOrDefault(filter).DateRelease = entity.DateRelease;
+            context.Set<Aircraft>().FirstOrDefault(filter).Lifetime = entity.Lifetime;
+            context.Set<Aircraft>().FirstOrDefault(filter).TypeAircraftId = entity.TypeAircraftId;
+            context.Set<Aircraft>().FirstOrDefault(filter).TypeAircraft = entity.TypeAircraft;
+            await context.SaveChangesAsync();
             return await base.GetById(filter);
         }
     }

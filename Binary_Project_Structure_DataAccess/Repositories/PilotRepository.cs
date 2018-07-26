@@ -1,6 +1,7 @@
 ﻿using Binary_Project_Structure_DataAccess.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,10 +18,11 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             if (pilot == null)
                 return null;
 
-            pilot.DateBirth = entity.DateBirth;
-            pilot.Experience = entity.Experience;
-            pilot.Name = entity.Name;
-            pilot.Surname = entity.Surname;
+            context.Set<Pilot>().FirstOrDefault(filter).DateBirth = entity.DateBirth;
+            context.Set<Pilot>().FirstOrDefault(filter).Experience = entity.Experience;
+            context.Set<Pilot>().FirstOrDefault(filter).Name = entity.Name;
+            context.Set<Pilot>().FirstOrDefault(filter).Surname = entity.Surname;
+            await context.SaveChangesAsync();
             return pilot;
 
         }

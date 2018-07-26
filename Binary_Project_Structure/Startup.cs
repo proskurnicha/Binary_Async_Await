@@ -19,6 +19,8 @@ using Binary_Project_Structure_DataAccess.Models;
 using Binary_Project_Structure_Shared.DTOs;
 using Binary_Project_Structure_DataAccess.Interfaces;
 using Binary_Project_Structure_DataAccess;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace Binary_Project_Structure
 {
@@ -45,6 +47,16 @@ namespace Binary_Project_Structure
             services.AddTransient<ITypeAircraftService, TypeAircraftService>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IParceService, ParceService>();
+            services.AddCors();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigin", builder => builder.AllowAnyOrigin());
+            });
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAllOrigin"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +68,8 @@ namespace Binary_Project_Structure
             }
 
             app.UseMvc();
+
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowCredentials().AllowAnyHeader().AllowAnyMethod());
         }
     }
 }

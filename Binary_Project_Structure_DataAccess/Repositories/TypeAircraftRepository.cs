@@ -5,6 +5,7 @@ using Binary_Project_Structure_DataAccess.Repositories;
 using Binary_Project_Structure_DataAccess.Models;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Binary_Project_Structure_DataAccess.Repositories
 {
@@ -18,9 +19,10 @@ namespace Binary_Project_Structure_DataAccess.Repositories
             if (typeAircraft == null)
                 return null;
 
-            typeAircraft.NumberPlaces = entity.NumberPlaces;
-            typeAircraft.AircraftModel = entity.AircraftModel;
-            typeAircraft.CarryingCapacity = entity.CarryingCapacity;
+            context.Set<TypeAircraft>().FirstOrDefault(filter).NumberPlaces = entity.NumberPlaces;
+            context.Set<TypeAircraft>().FirstOrDefault(filter).AircraftModel = entity.AircraftModel;
+            context.Set<TypeAircraft>().FirstOrDefault(filter).CarryingCapacity = entity.CarryingCapacity;
+            await context.SaveChangesAsync();
             return typeAircraft;
         }
     }
