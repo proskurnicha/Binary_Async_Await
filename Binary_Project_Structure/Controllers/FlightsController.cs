@@ -15,6 +15,7 @@ namespace Binary_Project_Structure.Controllers
 {
     [Produces("application/json")]
     [Route("api/Flights")]
+    [EnableCors("MyPolicy")]
     public class FlightsController : Controller
     {
         IFlightService service;

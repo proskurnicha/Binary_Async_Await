@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Binary_Project_Structure_BLL.Interfaces;
 using Binary_Project_Structure_BLL.Services;
 using Binary_Project_Structure_Shared.DTOs;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,7 @@ namespace Binary_Project_Structure.Controllers
 {
     [Produces("application/json")]
     [Route("api/Crews")]
+    [EnableCors("MyPolicy")]
     public class CrewsController : Controller
     {
         ICrewService service;

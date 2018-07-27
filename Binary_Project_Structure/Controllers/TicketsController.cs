@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Binary_Project_Structure_BLL.Interfaces;
 using Binary_Project_Structure_DataAccess.Models;
 using Binary_Project_Structure_Shared.DTOs;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,7 @@ namespace Binary_Project_Structure.Controllers
 {
     [Produces("application/json")]
     [Route("api/Tickets")]
+    [EnableCors("MyPolicy")]
     public class TicketsController : Controller
     {
         ITicketService service;

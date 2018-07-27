@@ -47,16 +47,12 @@ namespace Binary_Project_Structure
             services.AddTransient<ITypeAircraftService, TypeAircraftService>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IParceService, ParceService>();
-            services.AddCors();
-
-            services.AddCors(options =>
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
-                options.AddPolicy("AllowAllOrigin", builder => builder.AllowAnyOrigin());
-            });
-            services.Configure<MvcOptions>(options =>
-            {
-                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAllOrigin"));
-            });
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,7 +65,7 @@ namespace Binary_Project_Structure
 
             app.UseMvc();
 
-            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowCredentials().AllowAnyHeader().AllowAnyMethod());
+            app.UseCors("MyPolicy");
         }
     }
 }
