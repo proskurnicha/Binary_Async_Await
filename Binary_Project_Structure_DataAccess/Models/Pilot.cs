@@ -7,7 +7,6 @@ namespace Binary_Project_Structure_DataAccess.Models
 {
     public class Pilot
     {
-        [Required]
         public int Id { get; set; }
 
         [Required]

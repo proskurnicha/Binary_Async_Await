@@ -19,9 +19,9 @@ namespace Binary_Project_Structure_BLL.Helpers
 
             aTimer.Elapsed += (o, e) =>
             {
-                if (e.SignalTime.DayOfWeek == DayOfWeek.Monday)
+                if (e.SignalTime.DayOfWeek == DayOfWeek.Sunday)
                 {
-                    tcs.SetException(new Exception("Today is monday!"));
+                    tcs.SetException(new Exception("Today is Sunday!"));
                 }
                 else
                 {

@@ -7,15 +7,12 @@ namespace Binary_Project_Structure_DataAccess.Models
 {
     public class Aircraft
     {
-        [Required]
-        [Range(1, 999, ErrorMessage = "Unacceptable id")]
         public int Id { get; set; }
 
         [Required]
         public string AircraftName { get; set; }
 
         [Required]
-        [Range(1, 999, ErrorMessage = "Unacceptable TypeAircraft id")]
         public int TypeAircraftId { get; set; }
 
         public TypeAircraft TypeAircraft { get; set; }

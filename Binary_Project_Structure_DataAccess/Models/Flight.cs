@@ -8,8 +8,7 @@ namespace Binary_Project_Structure_DataAccess.Models
 {
     public class Flight
     {
-        [Required]
-        [Range(1, 999, ErrorMessage = "Unacceptable id")]
+        [Range(0, 999, ErrorMessage = "Unacceptable id")]
         public int Id { get; set; }
 
         [Required]
@@ -24,7 +23,6 @@ namespace Binary_Project_Structure_DataAccess.Models
         [Required]
         public TimeSpan ArrivalTime { get; set; }
 
-        [Required]
         public List<Ticket> Tickets { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace Binary_Project_Structure_Shared.DTOs
 {
     public class AircraftDto
     {
-        [Range(1, 999, ErrorMessage = "Unacceptable id")]
+        [Range(0, 999, ErrorMessage = "Unacceptable id")]
         public int Id { get; set; }
 
         [Required]

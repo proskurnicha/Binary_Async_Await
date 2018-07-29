@@ -8,7 +8,6 @@ namespace Binary_Project_Structure_DataAccess.Models
 {
     public class Crew
     {
-        [Required]
         public int Id { get; set; }
 
         [Required]
